@@ -1,20 +1,9 @@
-import { StatusBar } from "expo-status-bar";
-import React,{useEffect,useState} from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Login_screen from "./Screen/login_screen.js";
-import Register_screen from "./Screen/register_screen.js";
-import Profile_username_screen from "./Screen/profile_username_screen.js";
-import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator,CardStyleInterpolators } from "@react-navigation/stack";
-import Emailverify_screen from "./Screen/Emailverify_screen.js";
-import Forgot_password_screen from './Screen/Forgot_password_screen.js';
-import Main_screen from './Screen/Main_screen.js'
-
+import React, { useEffect, useState } from "react";
 import firebase from "firebase";
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
-const Stack = createStackNavigator();
-const Tab=createMaterialBottomTabNavigator();
+
+import UserNotloggedInNavigation from "../Pingme/app/Navigation/UserNotloggedIn.js";
+import UserloggedInNavigation from "../Pingme/app/Navigation/UserloggedIn.js";
+
 var firebaseConfig = {
   apiKey: "AIzaSyBlOajhHTxdgG9CdUfY0TyqH9sFRfZ6tFU",
   authDomain: "pingme-reactnativeproject.firebaseapp.com",
@@ -30,71 +19,23 @@ if (!firebase.apps.length) {
   firebase.app();
 }
 export default function App() {
-   const [loggedin,set_loggedin]=useState(false)
-    useEffect(()=>{
-        firebase.auth().onAuthStateChanged((user)=>{
-           if (user) {
-             set_loggedin(true)
-           } else {
-             set_loggedin(false)
-           }
-        })
-    },[])
-    if (loggedin) {
-      return(
-      <NavigationContainer>
-        <Stack.Navigator  >
-           <Stack.Screen name='mainscreen' component={Main_screen} options={{headerShown:false}}/>
-           
-        </Stack.Navigator>
-      </NavigationContainer>
-      );
-    }
-    else{
-      return (
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="loginscreen"
-              component={Login_screen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Register"
-              component={Register_screen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Emailverify"
-              component={Emailverify_screen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Profilescreen"
-              component={Profile_username_screen}
-              options={{ headerShown: false }}
-            />
-             <Stack.Screen
-              name="Forgotpasswordscreen"
-              component={Forgot_password_screen}
-              options={{ headerShown: false }}
-            />
-    
-    
-          </Stack.Navigator>
-        </NavigationContainer>
-      );
-    
-    }
-    
-  
+  const [loggedin, set_loggedin] = useState();
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        set_loggedin(true);
+      } else {
+        set_loggedin(false);
+      }
+    });
+  }, []);
+  if (loggedin) {
+    return (
+      <UserloggedInNavigation/>
+    );
+  } else {
+    return (
+      <UserNotloggedInNavigation/>
+    );
+  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
