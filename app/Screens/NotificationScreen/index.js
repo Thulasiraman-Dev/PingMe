@@ -19,12 +19,13 @@ export default function index() {
          type:docs.data().type,
          username:docs.data().username,
          profilepic:docs.data().profilepic,
-         uid:docs.data().uid
+         uid:docs.data().uid,
+      
         };
       });
       set_notifications(notification); 
     })
-
+     
     firebase.firestore().collection("Users").doc(firebase.auth().currentUser.uid)
     .onSnapshot((doc)=>{
       set_currentuserun(doc.data().username);
@@ -94,8 +95,19 @@ export default function index() {
       profilepic:pp,
       uid:uid,
       friends:"yes",
+      lastmsgtime:new Date().getHours()+":"+new Date().getMinutes()+":"+new Date().getSeconds(),
+      lastmsgdate:new Date().getDate()+"-"+new Date().getMonth()+"-"+new Date().getFullYear(),
+      lastmsg:"Send HI 👋",
+      newchat:1
+    })
+    firebase.firestore().collection("Chats").doc(firebase.auth().currentUser.uid).collection("Chats").doc(uid).collection("messages")
+    .add({
+      messagetype:1,
+      uid:uid,
       time:new Date().getHours()+":"+new Date().getMinutes()+":"+new Date().getSeconds(),
-      date:new Date().getDate()+"-"+new Date().getMonth()+"-"+new Date().getFullYear()
+      date:new Date().getDate()+"-"+new Date().getMonth()+"-"+new Date().getFullYear(),
+      message:"Send HI 👋",
+      
     })
 
     firebase.firestore().collection("Chats").doc(uid).collection("Chats").doc(firebase.auth().currentUser.uid)
@@ -104,8 +116,18 @@ export default function index() {
       profilepic:currentuserpp,
       uid:firebase.auth().currentUser.uid,
       friends:"yes",
+      lastmsgtime:new Date().getHours()+":"+new Date().getMinutes()+":"+new Date().getSeconds(),
+      lastmsgdate:new Date().getDate()+"-"+new Date().getMonth()+"-"+new Date().getFullYear(),
+      lastmsg:"Send HI 👋",
+      newchat:1
+    })
+    firebase.firestore().collection("Chats").doc(uid).collection("Chats").doc(firebase.auth().currentUser.uid).collection("messages")
+    .add({
+      messagetype:1,
+      uid:firebase.auth().currentUser.uid,
       time:new Date().getHours()+":"+new Date().getMinutes()+":"+new Date().getSeconds(),
-      date:new Date().getDate()+"-"+new Date().getMonth()+"-"+new Date().getFullYear()
+      date:new Date().getDate()+"-"+new Date().getMonth()+"-"+new Date().getFullYear(),
+      message:"Send HI 👋",
     })
   }
   

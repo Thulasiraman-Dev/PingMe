@@ -69,9 +69,9 @@ export default function index(props) {
           </View>
           <Divider style={{backgroundColor:"#CECACA90"}}/>
           <View style={Style.bottomsheetnormalcontainer}>
-             <TouchableOpacity style={{marginTop:14}} onPress={()=>{alert("friend")}}>
+             {/* <TouchableOpacity style={{marginTop:14}} onPress={()=>{alert("friend")}}>
                 <Text style={Style.friendstext}>Friends</Text>
-             </TouchableOpacity>
+             </TouchableOpacity> */}
              <TouchableOpacity style={{marginTop:14}} onPress={()=>{navigation.navigate("editprofilescreen"),set_bottomsheetvisible(false)}}>
                 <Text style={Style.edittext}>Edit profile</Text>
              </TouchableOpacity>

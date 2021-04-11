@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   chatscreen: {
-    flex: 1,
+    flex:1,
     backgroundColor: "#FFF",
   },
   header: {
@@ -44,15 +44,19 @@ export default StyleSheet.create({
   },
   messagebox:{
     flex:1,
-   
+    
+    
   },
   textinput: {
     width: 290,
-    height: 53,
+    height: 46,
     flex:1,
-    backgroundColor: "#E8E8E899",
-    paddingLeft: 5,
-    fontSize: 15,
-    paddingRight: 40,
+    backgroundColor: "#E8E8E890",
+    paddingLeft: 16,
+    fontSize: 16,
+    paddingRight: 20,
+    borderBottomLeftRadius:25,
+    borderTopLeftRadius:25,
+    
   },
 });

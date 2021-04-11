@@ -18,11 +18,11 @@ export default function UserloggedIn() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="homescreen" screenOptions={{headerShown:false,cardStyleInterpolator:CardStyleInterpolators.forNoAnimation}}>
         <Stack.Screen name="homescreen" component={Homescreen} />
+        <Stack.Screen name="chatscreen" component={Chatscreen}/>
         <Stack.Screen name="editprofilescreen" component={Editprofilescreen} />
         <Stack.Screen name="searchscreen" component={Searchscreen} />
         <Stack.Screen name="notificationscreen" component={Notificationscreen}/>
         <Stack.Screen name="addstoryscreen" component={Addstoryscreen}/>
-        <Stack.Screen name="chatscreen" component={Chatscreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
